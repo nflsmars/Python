@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+K1=9000
+K2=9200
+Interval=500
+ST=np.arange(K1-Interval,K2+Interval)
+Premium_Call_K1=313
+Premium_Call_K2=157
+Premium_Put_K1=32
+Premium_Put_K2=77
+PC_K1= np.maximum(ST-K1,0) - Premium_Call_K1
+PC_K2= np.maximum(ST-K2,0) - Premium_Call_K2
+PP_K1= np.maximum(K1-ST,0) - Premium_Put_K1
+PP_K2= np.maximum(K2-ST,0) - Premium_Put_K2
+#Straddle
+plt.figure(1)
+plt.plot(ST,PC_K1+PP_K1,color='#FF0000',label="Long Straddle")
+plt.plot(ST,-PC_K1-PP_K1,color='#00FF00',label="Short Straddle")
+plt.axhline(color='black')
+plt.ylabel('Options payoff')
+plt.xlabel('Stock Index')
+plt.title('Straddle Strategy')
+plt.legend(loc=1)
+#Strangle
+plt.figure(2)
+plt.plot(ST,PC_K1+PP_K2,color='#FF0000',label="Long Strangle")
+plt.plot(ST,-PC_K1-PP_K2,color='#00FF00',label="Short Strangle")
+plt.axhline(color='black')
+plt.ylabel('Options payoff')
+plt.xlabel('Stock Index')
+plt.title('Strangle Strategy')
+plt.legend()
+plt.show()
